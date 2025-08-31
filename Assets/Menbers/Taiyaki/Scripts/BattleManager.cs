@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -47,15 +46,15 @@ public class BattleManager : MonoBehaviour
         _playerCharactors.RemoveAt(0);
 
         if (enemyHead.HP <= 0) enemyHead.Deth();
-        else 
-        { 
-            enemyHead.DoKnockback=true; 
+        else
+        {
+            enemyHead.DoKnockback=true;
         }
 
         if (playerHead.HP <= 0) playerHead.Deth();
-        else 
+        else
         {
-            playerHead.DoKnockback=true; 
+            playerHead.DoKnockback=true;
         }
     }
 
