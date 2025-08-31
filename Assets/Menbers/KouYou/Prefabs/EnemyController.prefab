@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2061343909941814509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4728238460281996479}
+  - component: {fileID: 5207570304627612720}
+  m_Layer: 0
+  m_Name: EnemyController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4728238460281996479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061343909941814509}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.3206115, y: -1.6623524, z: 0.0059507475}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5207570304627612720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061343909941814509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e2e8d1786c03746b8b1b68ab85248c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyList:
+  - {fileID: 2722618347655051050, guid: 19344fc7b59e9df45921b3a90838666e, type: 3}
+  - {fileID: 2722618347655051050, guid: 19344fc7b59e9df45921b3a90838666e, type: 3}
+  - {fileID: 3854663889981208888, guid: 6801d96a5a57e41428291f925dfb5f75, type: 3}
+  - {fileID: 2722618347655051050, guid: 19344fc7b59e9df45921b3a90838666e, type: 3}
+  - {fileID: 3854663889981208888, guid: 6801d96a5a57e41428291f925dfb5f75, type: 3}
+  - {fileID: 2722618347655051050, guid: 19344fc7b59e9df45921b3a90838666e, type: 3}
+  - {fileID: 3854663889981208888, guid: 6801d96a5a57e41428291f925dfb5f75, type: 3}
+  - {fileID: 3854663889981208888, guid: 6801d96a5a57e41428291f925dfb5f75, type: 3}
+  - {fileID: 2722618347655051050, guid: 19344fc7b59e9df45921b3a90838666e, type: 3}
+  - {fileID: 2722618347655051050, guid: 19344fc7b59e9df45921b3a90838666e, type: 3}
+  - {fileID: 3854663889981208888, guid: 6801d96a5a57e41428291f925dfb5f75, type: 3}
+  - {fileID: 2722618347655051050, guid: 19344fc7b59e9df45921b3a90838666e, type: 3}
+  _boss: {fileID: 1305151244012442084, guid: d4abfacfc7437844a8310fda71ddcdbc, type: 3}
+  _enemyPos: {x: -7.5, y: 0, z: 0}
+  _enemyGate: {fileID: 8888660867300293474, guid: 7e47b8ae10d8aab4385552cc06b46bea, type: 3}
