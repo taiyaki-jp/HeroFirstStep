@@ -3,17 +3,27 @@ using UnityEngine;
 
 public class BattleManager
 {
-    private List<Character>[] _player = new List<Character>[4];
-    private List<Character>[] _enemies = new List<Character>[4];
-    private int[] _playerAttackValue = { 0, 0, 0, 0 };
-    private int[] _enemyAttackValue = { 0, 0, 0, 0 };
+    private readonly List<Character>[] _player = new List<Character>[4];
+    private readonly List<Character>[] _enemies = new List<Character>[4];
+    private readonly int[] _playerAttackValue = { 0, 0, 0, 0 };
+    private readonly int[] _enemyAttackValue = { 0, 0, 0, 0 };
+
+    public void Init()
+    {
+        for (var i = 0; i < _player.Length; i++)
+        {
+            _player[i] = new List<Character>();
+            _enemies[i] = new List<Character>();
+        }
+    }
 
     /// <summary>
     /// Listに追加し戦闘態勢に入る
     /// </summary>
-    /// <param name="character">追加するキャラ</param>
-    public void AddList(Character character)
+    /// <param name="characterObject">追加するキャラ</param>
+    public void AddList(GameObject characterObject)
     {
+        var character = characterObject.GetComponent<Character>();
         if (character.IsPlayer)
         {
             _player[character.AttackTiming].Add(character);
@@ -34,10 +44,10 @@ public class BattleManager
     public void Attack(int timing)
     {
         //プレイヤーの攻撃処理
-        var noDamageEnemy= Damage(_enemies[Random.Range(0, 3)], _playerAttackValue[timing]);
+        var noDamageEnemy = Damage(_enemies, Random.Range(0, 3), _playerAttackValue[timing]);
 
         //エネミーの攻撃処理
-        var noDamagePlayer= Damage(_player[Random.Range(0, 3)], _enemyAttackValue[timing]);
+        var noDamagePlayer = Damage(_player, Random.Range(0, 3), _enemyAttackValue[timing]);
 
         //攻撃後は死亡かノックバックで前線にいないのでリストを空にする
         _player[timing].Clear();
@@ -48,42 +58,59 @@ public class BattleManager
         //運良く攻撃を受けなかったやつはそのまま前線にいる
         foreach (var character in noDamagePlayer)
         {
-            AddList(character);
+            AddList(character.gameObject);
         }
 
         foreach (var character in noDamageEnemy)
         {
-            AddList(character);
+            AddList(character.gameObject);
         }
     }
 
     /// <summary>
     /// 集団でのダメージ処理
     /// </summary>
-    /// <param name="targetList">攻撃する対象の集団</param>
+    /// <param name="targetList">攻撃する対象</param>
+    /// <param name="targetIndex">どのグループか</param>
     /// <param name="damage">与える総ダメージ</param>
     /// <returns>ノーダメなやつら</returns>
-    private List<Character> Damage(List<Character> targetList, int damage)
+    private List<Character> Damage(List<Character>[] targetList, int targetIndex, int damage)
     {
         var remainingDamage = damage;
+        var i = targetIndex;
         var noDamageList = new List<Character>();
-        foreach (var target in targetList)
+        do //残ダメージある限りループ
         {
-            if (remainingDamage == 0)//残ダメージが0なら
+            //リスト内にダメージを与える
+            foreach (var target in targetList[i])
             {
-                noDamageList.Add(target);//ターゲットをノーダメListに入れて
-                continue;//次のループ
+                if (remainingDamage == 0) //残ダメージが0なら
+                {
+                    noDamageList.Add(target); //ターゲットをノーダメListに入れて
+                    continue; //次のループ
+                }
+
+                if (target.HP > remainingDamage) //残ダメージがターゲットのHP以下なら
+                {
+                    target.DoDamage(remainingDamage); //ダメージを与えて
+                    remainingDamage = 0; //残ダメージを0にして
+                    continue; //次のループ
+                }
+
+                //以上なら
+                target.DoDamage(target.HP); //その敵のHPを0にして
+                remainingDamage -= target.HP; //その分残ダメージを減らす
             }
-            if (target.HP > remainingDamage) //残ダメージがターゲットのHP以下なら
-            {
-                target.DoDamage(remainingDamage); //ダメージを与えて
-                remainingDamage =0;//残ダメージを0にして
-                continue; //次のループ
-            }
-            //以上なら
-            target.DoDamage(target.HP); //その敵のHPを0にして
-            remainingDamage -= target.HP; //その分残ダメージを減らす
-        }
+
+            i = (i + 1) % targetList[i].Count;
+            if (i == targetIndex) break;//一周してしまったら終了
+        } while (remainingDamage > 0);
+
         return noDamageList;
+    }
+
+    public void March()
+    {
+        
     }
 }
