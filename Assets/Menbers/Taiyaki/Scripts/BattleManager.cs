@@ -98,11 +98,12 @@ public class BattleManager
                 }
 
                 //以上なら
-                target.DoDamage(target.HP); //その敵のHPを0にして
-                remainingDamage -= target.HP; //その分残ダメージを減らす
+                remainingDamage -= target.HP; //ターゲットのHP分残ダメージを減らして
+                target.DoDamage(target.HP); //その敵のHPを0にする
+                
             }
 
-            i = (i + 1) % targetList[i].Count;
+            i = (i + 1) % targetList.Length;
             if (i == targetIndex) break;//一周してしまったら終了
         } while (remainingDamage > 0);
 
