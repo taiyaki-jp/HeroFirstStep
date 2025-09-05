@@ -7,6 +7,9 @@ public class BattleField : MonoBehaviour
     private int _battlePlayerCount = 0; //戦闘エリアにいるプレイヤーの総数
     private int _battleEnemyCount = 0; //戦闘エリアにいる敵の総数
 
+    private float _battleTimer = 0f;
+    private int _timing = 0;
+
     private Renderer _renderer;
     private Bounds _thisBound;
 
@@ -20,6 +23,8 @@ public class BattleField : MonoBehaviour
     {
         _battlePlayerCount = 0;
         _battleEnemyCount = 0;
+        _battleTimer = 0f;
+        _timing = 0;
         _battleManager = new BattleManager();
         _battleManager.Init();
         _renderer = GetComponent<Renderer>();
@@ -34,6 +39,8 @@ public class BattleField : MonoBehaviour
         {
             if (_thisBound.Intersects(character.Bounds) == false) continue; //もしキャラが戦闘エリアに被っていれば
             //戦闘開始
+            character.State = CharacterState.Battle;
+            _battleManager.AddList(character);
             _modeChangeCharacter.Add(character);
             if (character.IsPlayer)
                 _battlePlayerCount++;
@@ -49,6 +56,9 @@ public class BattleField : MonoBehaviour
         foreach (var character in _battleCharacter)
         {
             if (_thisBound.Intersects(character.Bounds)) continue; //もしキャラが戦闘エリアから離れていれば
+            //戦闘終了
+            character.State = CharacterState.Walk;
+            _battleManager.RemoveList(character);
             _modeChangeCharacter.Add(character);
             if (character.IsPlayer)
                 _battlePlayerCount--;
@@ -67,13 +77,23 @@ public class BattleField : MonoBehaviour
         else if (_battlePlayerCount == 0 &&_battleEnemyCount>0) //戦場にプレイヤーがいない＆敵はいる
             MoveField(1);//敵進軍
 
-        Debug.Log($"移動:{_moveCharacter.Count}\n戦闘:{_battleCharacter.Count}");
+        //Debug.Log($"移動:{_moveCharacter.Count}\n戦闘:{_battleCharacter.Count}");
+
+        //戦闘タイミングの送信
+        _battleTimer += Time.deltaTime;
+        if (_battleTimer >= 0.5f)
+        {
+            _battleTimer = 0f;
+            _battleManager.Attack(_timing);
+            _timing = (_timing + 1) % 4;
+            _moveCharacter.RemoveWhere(c => c == null);
+            _battleCharacter.RemoveWhere(c => c == null);
+        }
     }
 
     private void MoveField(int moveDirection)
     {
         this.gameObject.transform.position += new Vector3(_moveSpeed * moveDirection, 0, 0);
-        _battleManager.March();
     }
 
     public void AddCharacter(Character character)
