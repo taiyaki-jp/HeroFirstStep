@@ -74,7 +74,7 @@ public class Character : MonoBehaviour
     }
 
     /// <summary>
-    /// 移動に使う
+    /// 基本のステート分岐(もどき？)
     /// </summary>
     /// <param name="token"></param>
     private async UniTask Moving(CancellationToken token)
