@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6229337918794672466}
   - component: {fileID: 6569722095827557728}
   - component: {fileID: 8936728577345417121}
+  - component: {fileID: 1215902879414184869}
   m_Layer: 0
   m_Name: Otaku
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,3 +107,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1215902879414184869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4937791621103544999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0968f10857ddc45459abbd2a1fed2956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attack: 10
+  _hp: 20
+  _moveSpeed: 0.6
+  _cost: 10
+  _knockbackForce: 3
+  _deathEffectTime: 0.7

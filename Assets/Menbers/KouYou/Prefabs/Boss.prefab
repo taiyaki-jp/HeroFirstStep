@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5082631454015390244}
   - component: {fileID: 1160195248870964984}
   - component: {fileID: 43091354807985358}
+  - component: {fileID: 3139260538584297113}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,3 +107,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3139260538584297113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305151244012442084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0968f10857ddc45459abbd2a1fed2956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attack: 30
+  _hp: 50
+  _moveSpeed: 0.3
+  _cost: 100
+  _knockbackForce: 1
+  _deathEffectTime: 1

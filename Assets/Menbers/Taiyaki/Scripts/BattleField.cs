@@ -39,7 +39,7 @@ public class BattleField : MonoBehaviour
         {
             if (_thisBound.Intersects(character.Bounds) == false) continue; //もしキャラが戦闘エリアに被っていれば
             //戦闘開始
-            character.State = CharacterState.Battle;
+            character.State = Character.CharacterState.Battle;
             _battleManager.AddList(character);
             _modeChangeCharacter.Add(character);
             if (character.IsPlayer)
@@ -57,7 +57,7 @@ public class BattleField : MonoBehaviour
         {
             if (_thisBound.Intersects(character.Bounds)) continue; //もしキャラが戦闘エリアから離れていれば
             //戦闘終了
-            character.State = CharacterState.Walk;
+            character.State = Character.CharacterState.Walk;
             _battleManager.RemoveList(character);
             _modeChangeCharacter.Add(character);
             if (character.IsPlayer)

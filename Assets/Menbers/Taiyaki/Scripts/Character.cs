@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
     public int Attack => _attack;
     [SerializeField, Label("HP")] private int _hp = 20;
     public int HP => _hp;
-    [SerializeField, Label("移動速度")] private float _moveSpeed;
+    [SerializeField, Label("移動速度")] private float _moveSpeed=0.3f;
 
     [SerializeField, Label("(味方)必要コスト/(敵)倒すともらえるコスト")]
     private int _cost = 10;
@@ -21,12 +21,15 @@ public class Character : MonoBehaviour
     public bool IsPlayer { get; private set; } //プレイヤーかどうか
     public int AttackTiming { get; private set; } //攻撃タイミング分類
 
-    private CharacterState _state;
-
-    public CharacterState State
+    public enum CharacterState
     {
-        set => _state = value;
+        Death,
+        Walk,
+        Battle,
+        Knockback,
     }
+    private CharacterState _state;
+    public CharacterState State { set => _state = value; }
 
     private Renderer _renderer; //↓をとるため
     public Bounds Bounds { get; private set; } //現在位置
@@ -49,7 +52,8 @@ public class Character : MonoBehaviour
         _renderer = this.GetComponent<Renderer>();
     }
 
-    private void Start()
+    //private void Start()
+    public void StartMove()
     {
         if (IsPlayer)
         {
@@ -63,6 +67,7 @@ public class Character : MonoBehaviour
         }
 
         //行動開始
+        this.GetComponent<Animator>().enabled = false;
         _state = CharacterState.Walk;
         _ = Moving(_cancellationTokenSource.Token);
     }
@@ -129,10 +134,10 @@ public class Character : MonoBehaviour
     /// </summary>
     private async UniTask Knockback(CancellationToken token)
     {
-        //_cancellationTokenSource.Cancel(); //既存UniTaskを全部中止
+        SoundManager.Instance.PlaySE(SEAudioData.SEType.Damage);
 
         Vector3 startPos = transform.position;
-        Vector3 targetPos = startPos + new Vector3(-_moveMultiplier * _knockbackForce, startPos.y, startPos.z);
+        Vector3 targetPos = startPos + new Vector3(-_moveMultiplier * _knockbackForce,0,0);
 
         Tween jump = transform.DOJump(targetPos, 1, 1, 0.4f).SetEase(Ease.OutCubic);
         Tween rotate = transform.DORotate(new Vector3(0, 0, 360 * _moveMultiplier), 0.4f, RotateMode.FastBeyond360);
@@ -150,6 +155,8 @@ public class Character : MonoBehaviour
     private async UniTask Death()
     {
         _cancellationTokenSource.Cancel(); //既存UniTaskを全部中止
+
+        SoundManager.Instance.PlaySE(SEAudioData.SEType.Death);
 
         Tween move = transform.DOMove(_deathMoveTo.transform.position, _deathEffectTime).SetEase(Ease.OutCubic);
         Tween rotate = transform.DORotate(new Vector3(0, 0, 720 * _moveMultiplier), _deathEffectTime,
@@ -171,12 +178,4 @@ public class Character : MonoBehaviour
     {
         _cancellationTokenSource.Cancel();
     }
-}
-
-public enum CharacterState
-{
-    Death,
-    Walk,
-    Battle,
-    Knockback,
 }

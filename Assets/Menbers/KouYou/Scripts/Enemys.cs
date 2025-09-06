@@ -9,6 +9,7 @@ public class Enemys : MonoBehaviour
     private int _index;
     [SerializeField] private Vector3 _enemyPos;
     [SerializeField] private Animator _enemyGate;
+    [SerializeField] private BattleField _battleField;
     void Start()
     {
         StartCoroutine(CreateEnemys());
@@ -17,8 +18,9 @@ public class Enemys : MonoBehaviour
     {
         if(_index == _enemyList.Count)
         {
-            Instantiate(_boss, _enemyPos, Quaternion.identity);
-            _index = 0;         
+            GameObject chara = (GameObject) Instantiate(_boss, _enemyPos, Quaternion.identity);
+            _battleField.AddCharacter(chara.GetComponent<Character>());
+            _index = 0;
         }
     }
     private IEnumerator CreateEnemys()
@@ -27,10 +29,11 @@ public class Enemys : MonoBehaviour
         for ( _index = 0; _index < _enemyList.Count; _index++)
         {
             _enemyGate.SetBool("Open", true);
-            Instantiate(_enemyList[_index], _enemyPos, Quaternion.identity);
+            GameObject chara = (GameObject) Instantiate(_enemyList[_index], _enemyPos, Quaternion.identity);
+            _battleField.AddCharacter(chara.GetComponent<Character>());
             yield return new WaitForSeconds(0.5f);
             _enemyGate.SetBool("Open", false);
             yield return new WaitForSeconds(10.0f);
-        }    
+        }
     }
 }
