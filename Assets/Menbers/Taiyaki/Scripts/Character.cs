@@ -38,7 +38,7 @@ public class Character : MonoBehaviour
     private int _moveMultiplier; //後ろ回転の方向
     private GameObject _deathMoveTo; //死亡演出でどこにすっ飛ぶか
 
-    [SerializeField, Label("ノックバックでどれだけ飛ぶか")] private int _knockbackForce = 3;
+    [SerializeField, Label("ノックバックでどれだけ飛ぶか")] private float _knockbackForce = 3;
     [SerializeField, Label("死亡演出の時間")] private float _deathEffectTime = 0.7f;
 
     private readonly CancellationTokenSource _cancellationTokenSource = new();

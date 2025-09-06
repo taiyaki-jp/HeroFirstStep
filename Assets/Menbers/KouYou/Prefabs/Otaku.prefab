@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attack: 10
-  _hp: 20
-  _moveSpeed: 0.6
+  _hp: 10
+  _moveSpeed: 0.3
   _cost: 10
-  _knockbackForce: 3
+  _knockbackForce: 1.5
   _deathEffectTime: 0.7
