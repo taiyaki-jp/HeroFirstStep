@@ -35,11 +35,11 @@ public class Character : MonoBehaviour
     public Bounds Bounds { get; private set; } //現在位置
 
     [Header("演出系")]
-    private int _moveMultiplier; //後ろ回転の方向
-    private GameObject _deathMoveTo; //死亡演出でどこにすっ飛ぶか
-
     [SerializeField, Label("ノックバックでどれだけ飛ぶか")] private float _knockbackForce = 3;
     [SerializeField, Label("死亡演出の時間")] private float _deathEffectTime = 0.7f;
+
+    private int _moveMultiplier; //後ろ回転の方向
+    private GameObject _deathMoveTo; //死亡演出でどこにすっ飛ぶか
 
     private readonly CancellationTokenSource _cancellationTokenSource = new();
 

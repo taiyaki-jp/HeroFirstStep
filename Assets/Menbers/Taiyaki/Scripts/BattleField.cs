@@ -86,6 +86,7 @@ public class BattleField : MonoBehaviour
             _battleTimer = 0f;
             _battleManager.Attack(_timing);
             _timing = (_timing + 1) % 4;
+            //nullの枠＝もう消えたやつを削除
             _moveCharacter.RemoveWhere(c => c == null);
             _battleCharacter.RemoveWhere(c => c == null);
         }

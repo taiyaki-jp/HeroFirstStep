@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class ButtonSetter : MonoBehaviour
 {
     [SerializeField,Label("召喚するキャラのプレハブ")] private GameObject _characterPrefab;
@@ -28,7 +29,7 @@ public class ButtonSetter : MonoBehaviour
             Debug.LogWarning($"{this.name} 召喚対象を認識できませんでした");
             return;
         }
-        //_charaImage.sprite = _character.image;
+        _charaImage.sprite = _characterPrefab.GetComponent<SpriteRenderer>().sprite;
         //_nameText.text = _character.CharaName;
         _CostText.text = _character.Cost.ToString();
         _AtkText.text = _character.Attack.ToString();

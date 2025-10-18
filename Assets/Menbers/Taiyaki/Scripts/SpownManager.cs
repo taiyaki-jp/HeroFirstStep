@@ -1,17 +1,41 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class SpownManager : MonoBehaviour
 {
     private BattleField _battleField;
-    [SerializeField]List<Character> _characters = new ();
     // Start is called before the first frame update
     void Start()
     {
-        _battleField = GameObject.Find("BattleField").GetComponent<BattleField>();
-        foreach (var character in _characters)
-        {
-            _battleField.AddCharacter(character);
-        }
+        _battleField = this.GetComponent<BattleField>();
     }
+    public void CharacterSpown(GameObject characterPrefab,Character character)
+    {
+        if (character != null) 
+        {
+            Debug.LogWarning("キャラではない物をスポーンしようとしました");
+            return; 
+        }
+        _battleField.AddCharacter(character);
+        if (characterPrefab.CompareTag("Player"))
+        {
+            SpownPlayer(characterPrefab);
+        }
+        else
+        {
+            SpownEnemy(characterPrefab);
+        }
+
+    }
+    private void SpownPlayer(GameObject characterPrefab)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void SpownEnemy(GameObject characterPrefab)
+    {
+        throw new NotImplementedException();
+    }
+
+    
 }
