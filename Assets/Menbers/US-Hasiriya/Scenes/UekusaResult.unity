@@ -707,7 +707,7 @@ GameObject:
   - component: {fileID: 890078274}
   - component: {fileID: 890078275}
   m_Layer: 5
-  m_Name: TitleText
+  m_Name: ClearText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -976,6 +976,7 @@ GameObject:
   - component: {fileID: 924614555}
   - component: {fileID: 924614554}
   - component: {fileID: 924614558}
+  - component: {fileID: 924614559}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1050,6 +1051,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startButton: {fileID: 232030130}
   _sceneName: Stage
+--- !u!114 &924614559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924614553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1cd290670d51e4897308f02647a684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resultText: {fileID: 2086950565}
 --- !u!1001 &1178548459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1348,7 +1362,7 @@ GameObject:
   - component: {fileID: 2086950566}
   - component: {fileID: 2086950565}
   m_Layer: 5
-  m_Name: TitleText (1)
+  m_Name: StageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1393,7 +1407,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30B9\u30C6\u30FC\u30B81"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f4793e4c6ac75649a28a76aa6289e0c, type: 2}
   m_sharedMaterial: {fileID: -6021441782073751087, guid: 0f4793e4c6ac75649a28a76aa6289e0c, type: 2}
@@ -1420,7 +1434,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 95.3
+  m_fontSize: 5000
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
