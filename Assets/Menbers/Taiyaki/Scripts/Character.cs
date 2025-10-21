@@ -31,12 +31,13 @@ public class Character : MonoBehaviour
     private CharacterState _state;
     public CharacterState State { set => _state = value; }
 
-    private Renderer _renderer; //↓をとるため
-    public Bounds Bounds { get; private set; } //現在位置
+    public Renderer Renderer { get; private set; } //現在位置をとるため
 
     [Header("演出系")]
     [SerializeField, Label("ノックバックでどれだけ飛ぶか")] private float _knockbackForce = 3;
     [SerializeField, Label("死亡演出の時間")] private float _deathEffectTime = 0.7f;
+    private int _moveMultiplier; //後ろ回転の方向
+    private GameObject _deathMoveTo; //死亡演出でどこにすっ飛ぶか
 
     private int _moveMultiplier; //後ろ回転の方向
     private GameObject _deathMoveTo; //死亡演出でどこにすっ飛ぶか
@@ -49,7 +50,7 @@ public class Character : MonoBehaviour
         AttackTiming = Random.Range(0, 3);
         //タグからプレイヤーかどうかを見る
         IsPlayer = this.CompareTag("Player");
-        _renderer = this.GetComponent<Renderer>();
+        Renderer = this.GetComponent<Renderer>();
     }
 
     //private void Start()
@@ -70,12 +71,6 @@ public class Character : MonoBehaviour
         this.GetComponent<Animator>().enabled = false;
         _state = CharacterState.Walk;
         _ = Moving(_cancellationTokenSource.Token);
-    }
-
-    private void LateUpdate()
-    {
-        //現在位置の当たり判定を取得
-        Bounds = _renderer.bounds;
     }
 
     /// <summary>
@@ -136,8 +131,8 @@ public class Character : MonoBehaviour
     {
         SoundManager.Instance.PlaySE(SEAudioData.SEType.Damage);
 
-        Vector3 startPos = transform.position;
-        Vector3 targetPos = startPos + new Vector3(-_moveMultiplier * _knockbackForce,0,0);
+        var startPos = transform.position;
+        var targetPos = startPos + new Vector3(-_moveMultiplier * _knockbackForce,0,0);
 
         Tween jump = transform.DOJump(targetPos, 1, 1, 0.4f).SetEase(Ease.OutCubic);
         Tween rotate = transform.DORotate(new Vector3(0, 0, 360 * _moveMultiplier), 0.4f, RotateMode.FastBeyond360);
