@@ -39,9 +39,6 @@ public class Character : MonoBehaviour
     private int _moveMultiplier; //後ろ回転の方向
     private GameObject _deathMoveTo; //死亡演出でどこにすっ飛ぶか
 
-    private int _moveMultiplier; //後ろ回転の方向
-    private GameObject _deathMoveTo; //死亡演出でどこにすっ飛ぶか
-
     private readonly CancellationTokenSource _cancellationTokenSource = new();
 
     private void Awake()

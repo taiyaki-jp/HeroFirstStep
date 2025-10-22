@@ -13,7 +13,7 @@ public class SpownManager : MonoBehaviour
     {
         if (character != null) 
         {
-            Debug.LogWarning("�L�����ł͂Ȃ������X�|�[�����悤�Ƃ��܂���");
+            Debug.LogWarning("キャラではない物をスポーンしようとしました");
             return; 
         }
         _battleField.AddCharacter(character);

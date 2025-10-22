@@ -3,14 +3,15 @@ using UnityEngine;
 
 public class BattleManager
 {
-    private readonly HashSet<Character>[] _player = new HashSet<Character>[4];
-    private readonly HashSet<Character>[] _enemies = new HashSet<Character>[4];
+    private const int TimingRange = 4;
+    private readonly HashSet<Character>[] _player = new HashSet<Character>[TimingRange];
+    private readonly HashSet<Character>[] _enemies = new HashSet<Character>[TimingRange];
     private readonly int[] _playerAttackValue = { 0, 0, 0, 0 };
     private readonly int[] _enemyAttackValue = { 0, 0, 0, 0 };
 
     public void Init()
     {
-        for (var i = 0; i < _player.Length; i++)
+        for (var i = 0; i < TimingRange; i++)
         {
             _player[i] = new HashSet<Character>();
             _enemies[i] = new HashSet<Character>();
@@ -60,7 +61,7 @@ public class BattleManager
     /// <param name="timing">どの集団に攻撃させるか</param>
     public void Attack(int timing)
     {
-        for (var i = 0; i < _player.Length; i++)
+        for (var i = 0; i < TimingRange; i++)
         {
             _player[i].RemoveWhere(c => c == null);
             _enemies[i].RemoveWhere(c => c == null);
