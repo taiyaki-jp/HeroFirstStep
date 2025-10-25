@@ -4,18 +4,21 @@ using UnityEngine;
 public class SpownManager : MonoBehaviour
 {
     private BattleField _battleField;
+    private GameObject _playerHomeSpownPoint;
+    private GameObject _enemyHomeSpownPoint;
     // Start is called before the first frame update
     void Start()
     {
         _battleField = this.GetComponent<BattleField>();
     }
-    public void CharacterSpown(GameObject characterPrefab,Character character)
+    /// <summary>
+    /// 引数のキャラをスポーンさせる
+    /// </summary>
+    /// <param name="characterPrefab">スポーンさせるキャラのプレハブ</param>
+    /// <param name="character">そのキャラのCharacterクラス</param>
+    public void CharacterSpown(GameObject characterPrefab)
     {
-        if (character != null) 
-        {
-            Debug.LogWarning("キャラではない物をスポーンしようとしました");
-            return; 
-        }
+        var character = characterPrefab.GetComponent<Character>();
         _battleField.AddCharacter(character);
         if (characterPrefab.CompareTag("Player"))
         {
@@ -27,11 +30,19 @@ public class SpownManager : MonoBehaviour
         }
 
     }
+    /// <summary>
+    /// プレイヤー側のスポーン
+    /// </summary>
+    /// <param name="characterPrefab">スポーンさせるキャラのプレハブ</param>
     private void SpownPlayer(GameObject characterPrefab)
     {
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// エネミー側のスポーン
+    /// </summary>
+    /// <param name="characterPrefab">スポーンさせるキャラのプレハブ</param>
     private void SpownEnemy(GameObject characterPrefab)
     {
         throw new NotImplementedException();

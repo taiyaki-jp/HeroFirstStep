@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8839987145938944563}
   - component: {fileID: 3900072586162078371}
   - component: {fileID: 2115861616934510892}
+  - component: {fileID: 8440397753184466952}
   m_Layer: 0
   m_Name: BattleField
   m_TagString: Untagged
@@ -98,3 +99,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 0.2
+--- !u!114 &8440397753184466952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4500115690823232550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cac8c755c7ab6e439124a8521a50423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

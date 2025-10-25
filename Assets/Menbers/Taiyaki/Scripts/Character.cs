@@ -4,14 +4,20 @@ using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using System.Threading.Tasks;
 
 public class Character : MonoBehaviour
 {
     [Header("基本ステータス")]
+    [SerializeField, Label("名前")] private string _name = "none";
+    public string Name {  get { return _name; } }
+
     [SerializeField, Label("攻撃力")] private int _attack = 10;
     public int Attack => _attack;
+
     [SerializeField, Label("HP")] private int _hp = 20;
     public int HP => _hp;
+
     [SerializeField, Label("移動速度")] private float _moveSpeed=0.3f;
 
     [SerializeField, Label("(味方)必要コスト/(敵)倒すともらえるコスト")]
@@ -31,7 +37,7 @@ public class Character : MonoBehaviour
     private CharacterState _state;
     public CharacterState State { set => _state = value; }
 
-    public Renderer Renderer { get; private set; } //現在位置をとるため
+    public Renderer CharaRenderer { get; private set; } //現在位置をとるため
 
     [Header("演出系")]
     [SerializeField, Label("ノックバックでどれだけ飛ぶか")] private float _knockbackForce = 3;
@@ -47,11 +53,10 @@ public class Character : MonoBehaviour
         AttackTiming = Random.Range(0, 3);
         //タグからプレイヤーかどうかを見る
         IsPlayer = this.CompareTag("Player");
-        Renderer = this.GetComponent<Renderer>();
+        CharaRenderer = this.GetComponent<Renderer>();
     }
 
-    //private void Start()
-    public void StartMove()
+    public async Task StartMove()
     {
         if (IsPlayer)
         {
@@ -64,10 +69,25 @@ public class Character : MonoBehaviour
             _deathMoveTo = GameObject.Find("EnemyDeathPoint");
         }
 
+        await Spown(_cancellationTokenSource.Token);
+
         //行動開始
         this.GetComponent<Animator>().enabled = false;
         _state = CharacterState.Walk;
         _ = Moving(_cancellationTokenSource.Token);
+    }
+
+    private async UniTask Spown(CancellationToken token)
+    {
+        var order = 0;
+        CharaRenderer.sortingOrder = order;
+        var t = 0.0f;
+        while (t<1.5f)
+        {
+
+            t += Time.deltaTime;
+            await UniTask.Yield(token);
+        }
     }
 
     /// <summary>

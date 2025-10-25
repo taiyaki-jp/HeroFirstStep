@@ -42,7 +42,7 @@ public class BattleField : MonoBehaviour
         //戦闘開始ロジック
         foreach (var character in _moveCharacter)
         {
-            if (_thisBound.Intersects(character.Renderer.bounds) == false) continue; //もしキャラが戦闘エリアに被っていれば
+            if (_thisBound.Intersects(character.CharaRenderer.bounds) == false) continue; //もしキャラが戦闘エリアに被っていれば
             //戦闘開始
             character.State = Character.CharacterState.Battle;
             _battleManager.AddList(character);
@@ -60,7 +60,7 @@ public class BattleField : MonoBehaviour
         //戦闘終了ロジック
         foreach (var character in _battleCharacter)
         {
-            if (_thisBound.Intersects(character.Renderer.bounds)) continue; //もしキャラが戦闘エリアから離れていれば
+            if (_thisBound.Intersects(character.CharaRenderer.bounds)) continue; //もしキャラが戦闘エリアから離れていれば
             //戦闘終了
             character.State = Character.CharacterState.Walk;
             _battleManager.RemoveList(character);
