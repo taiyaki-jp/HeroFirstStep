@@ -11,26 +11,29 @@ public class OkanHou : MonoBehaviour
     [SerializeField]private List<Sprite> _sprites = new List<Sprite>();
     [SerializeField]private Button _button;
     [SerializeField] private float _moveValue;
+    [SerializeField] private ParticleSystem _particle;
 
     private SpriteRenderer _renderer;
-    [SerializeField]private ParticleSystem _particle;
+    Vector3 _position;
 
     private void Start()
     {
         _button.onClick.AddListener(() => _ = Move());
         _renderer = this.GetComponent<SpriteRenderer>();
+        _position = this.transform.position;
     }
 
     private async UniTask Move()
     {
-        var defPos=this.transform.position;
+        _button.interactable = false;
         var moveTo=new Vector3(this.transform.position.x,this.transform.position.y+_moveValue,this.transform.position.z);
         Tween tween = transform.DOMove(moveTo,1);
         await tween.ToUniTask();
         await EffectStart();
-        Tween backTween=transform.DOMove(defPos,1);
+        Tween backTween=transform.DOMove(_position,1);
         await backTween.ToUniTask();
         _renderer.sprite = _sprites[0];
+        _button.interactable = true;
     }
 
     private async UniTask EffectStart()
