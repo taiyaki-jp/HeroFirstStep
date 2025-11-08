@@ -69,6 +69,8 @@ public class SEAudioData
         Button,
         Damage,
         Death,
+        ShockWave,
+        OkanVoice,
     }
 
     public SEType _type;
