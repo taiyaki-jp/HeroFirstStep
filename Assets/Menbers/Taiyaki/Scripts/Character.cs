@@ -10,7 +10,7 @@ public class Character : MonoBehaviour
 {
     [Header("基本ステータス")]
     [SerializeField, Label("名前")] private string _name = "none";
-    public string Name {  get { return _name; } }
+    public string Name => _name;
 
     [SerializeField, Label("攻撃力")] private int _attack = 10;
     public int Attack => _attack;
@@ -69,7 +69,7 @@ public class Character : MonoBehaviour
             _deathMoveTo = GameObject.Find("EnemyDeathPoint");
         }
 
-        await Spown(_cancellationTokenSource.Token);
+        await Spawn(_cancellationTokenSource.Token);
 
         //行動開始
         this.GetComponent<Animator>().enabled = false;
@@ -77,9 +77,9 @@ public class Character : MonoBehaviour
         _ = Moving(_cancellationTokenSource.Token);
     }
 
-    private async UniTask Spown(CancellationToken token)
+    private async UniTask Spawn(CancellationToken token)
     {
-        var order = 0;
+        var order = Mathf.CeilToInt(Time.deltaTime);
         CharaRenderer.sortingOrder = order;
         var t = 0.0f;
         while (t<1.5f)

@@ -17,11 +17,11 @@ public class ButtonSetter : MonoBehaviour
     private TextMeshProUGUI _CostText;
 
     private Character _character;
-    private SpownManager _spownManager;
+    private SpawnManager _spawnManager;
     // Start is called before the first frame update
     void Start()
     {
-        _spownManager = GameObject.Find("BattleField").GetComponent<SpownManager>();
+        _spawnManager = GameObject.Find("BattleField").GetComponent<SpawnManager>();
         _button = this.GetComponent<Button>();
 
         //各要素を拾ってくる
@@ -45,6 +45,6 @@ public class ButtonSetter : MonoBehaviour
         _HPText.text += _character.HP.ToString();
 
 
-        _button.onClick.AddListener(()=> _spownManager.CharacterSpown(_characterPrefab));
+        _button.onClick.AddListener(()=> _spawnManager.CharacterSpawn(_characterPrefab));
     }
 }
