@@ -37,7 +37,7 @@ public class Character : MonoBehaviour
     private CharacterState _state;
     public CharacterState State { set => _state = value; }
 
-    public Renderer CharaRenderer { get; private set; } //現在位置をとるため
+    public SpriteRenderer CharaRenderer { get; private set; } //現在位置をとるため
 
     [Header("演出系")]
     [SerializeField, Label("ノックバックでどれだけ飛ぶか")] private float _knockbackForce = 3;
@@ -53,10 +53,14 @@ public class Character : MonoBehaviour
         AttackTiming = Random.Range(0, 3);
         //タグからプレイヤーかどうかを見る
         IsPlayer = this.CompareTag("Player");
-        CharaRenderer = this.GetComponent<Renderer>();
+        CharaRenderer = this.GetComponent<SpriteRenderer>();
     }
 
-    public async Task StartMove()
+    /// <summary>
+    /// 初期設定→スポーン演出→メインループへ
+    /// </summary>
+    /// <returns></returns>
+    public async void Start()
     {
         if (IsPlayer)
         {
@@ -69,25 +73,30 @@ public class Character : MonoBehaviour
             _deathMoveTo = GameObject.Find("EnemyDeathPoint");
         }
 
-        await Spawn(_cancellationTokenSource.Token);
+        await SpawnMove(_cancellationTokenSource.Token);
 
         //行動開始
-        this.GetComponent<Animator>().enabled = false;
         _state = CharacterState.Walk;
         _ = Moving(_cancellationTokenSource.Token);
     }
 
-    private async UniTask Spawn(CancellationToken token)
+    /// <summary>
+    /// スポーン時のちょっとした演出
+    /// </summary>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    private async UniTask SpawnMove(CancellationToken token)
     {
-        var order = Mathf.CeilToInt(Time.deltaTime);
-        CharaRenderer.sortingOrder = order;
-        var t = 0.0f;
-        while (t<1.5f)
-        {
+        var tergetYPos = Random.Range(-0.5f, -2.5f);//Y座標をランダムにしてそれっぽく
+        CharaRenderer.sortingOrder = (int)(Mathf.Abs(tergetYPos)*10);//絶対値で-消し、*10で少数第一位までをIntにして参照、それ以下は切り捨てなのでキャストでいい
+        var tergetPos = new Vector3(this.transform.position.x ,tergetYPos,this.transform.position.z);
 
-            t += Time.deltaTime;
-            await UniTask.Yield(token);
-        }
+        Tween SpawnTween = transform.DOMove(tergetPos,1.5f);
+        Tween ColorTween = CharaRenderer.DOColor(Color.white,0.5f);
+        await UniTask.WhenAll(
+            SpawnTween.ToUniTask(),
+            ColorTween.ToUniTask()
+            );
     }
 
     /// <summary>
@@ -121,7 +130,7 @@ public class Character : MonoBehaviour
     /// <param name="token"></param>
     private async UniTask Walk(CancellationToken token)
     {
-        while (_state == CharacterState.Walk)
+        while (_state == CharacterState.Walk)//BattleFieldに触れたら変わる
         {
             this.transform.position =
                 new Vector3(this.transform.position.x + (_moveSpeed * _moveMultiplier) * Time.deltaTime,
