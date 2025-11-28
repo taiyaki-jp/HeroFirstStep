@@ -4,7 +4,6 @@ using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using System.Threading.Tasks;
 
 public class Character : MonoBehaviour
 {
@@ -87,15 +86,15 @@ public class Character : MonoBehaviour
     /// <returns></returns>
     private async UniTask SpawnMove(CancellationToken token)
     {
-        var tergetYPos = Random.Range(-0.5f, -2.5f);//Y座標をランダムにしてそれっぽく
-        CharaRenderer.sortingOrder = (int)(Mathf.Abs(tergetYPos)*10);//絶対値で-消し、*10で少数第一位までをIntにして参照、それ以下は切り捨てなのでキャストでいい
-        var tergetPos = new Vector3(this.transform.position.x ,tergetYPos,this.transform.position.z);
+        var targetYPos = Random.Range(-0.5f, -2.5f);//Y座標をランダムにしてそれっぽく
+        CharaRenderer.sortingOrder = (int)(Mathf.Abs(targetYPos)*10);//絶対値で-消し、*10で少数第一位までをIntにして参照、それ以下は切り捨てなのでキャストでいい
+        var targetPos = new Vector3(this.transform.position.x ,targetYPos,this.transform.position.z);
 
-        Tween SpawnTween = transform.DOMove(tergetPos,1.5f);
-        Tween ColorTween = CharaRenderer.DOColor(Color.white,0.5f);
+        Tween spawnTween = transform.DOMove(targetPos,1.5f);
+        Tween colorTween = CharaRenderer.DOColor(Color.white,0.5f);
         await UniTask.WhenAll(
-            SpawnTween.ToUniTask(),
-            ColorTween.ToUniTask()
+            spawnTween.ToUniTask(cancellationToken: token),
+            colorTween.ToUniTask(cancellationToken: token)
             );
     }
 

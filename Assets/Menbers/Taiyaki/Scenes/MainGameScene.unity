@@ -1972,7 +1972,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4500115690823232550, guid: ae84adea6c50a714781a86fc4868b3a2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2095969527}
   m_SourcePrefab: {fileID: 100100000, guid: ae84adea6c50a714781a86fc4868b3a2, type: 3}
 --- !u!1 &1249883741
 GameObject:
@@ -2750,6 +2753,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917370809}
   m_CullTransparentMesh: 1
+--- !u!1 &2095969522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4500115690823232550, guid: ae84adea6c50a714781a86fc4868b3a2, type: 3}
+  m_PrefabInstance: {fileID: 1199937988}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2095969527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095969522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f68824812d6db24b8790c25b3c564d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useEnemies:
+  - {fileID: 2722618347655051050, guid: 5c7060354fc54214695b97f1641f25c3, type: 3}
+  - {fileID: 3854663889981208888, guid: 11b7990e1bb17c54eb7e04edf1fd7a0c, type: 3}
+  _bossEnemy: {fileID: 1305151244012442084, guid: 79dcf9e742a08084e86c642965bdadaa, type: 3}
+  _spawnRate: 1.5
+  _bossCount: 7
 --- !u!1 &2107134459
 GameObject:
   m_ObjectHideFlags: 0

@@ -84,7 +84,7 @@ public class BattleManager
     {
         var remainingDamage = damage;
         var i = targetIndex;
-        do //残ダメージある限りループ
+        while (remainingDamage > 0) //残ダメージある限りループ
         {
             //リスト内にダメージを与える
             foreach (var target in targetList[i])
@@ -105,6 +105,6 @@ public class BattleManager
 
             i = (i + 1) % targetList.Length;
             if (i == targetIndex) break;//一周してしまったら終了
-        } while (remainingDamage > 0);
+        }
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5331413236968964404}
   - component: {fileID: 5698181885892209057}
-  - component: {fileID: 583767244535481697}
+  - component: {fileID: 5394228155293971926}
   m_Layer: 0
   m_Name: PlayerGate
   m_TagString: Untagged
@@ -86,27 +86,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &583767244535481697
-Animator:
-  serializedVersion: 5
+--- !u!114 &5394228155293971926
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2462383088252402715}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 38a3645309ea66048a44aa57666b2730, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9859a2901bb77244836761746e975c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _doorCloseTimerDef: 1
+  _doorCloseSprites:
+  - {fileID: -601539779040702467, guid: b79f22cd227d76c4b9c9986dcf0514f0, type: 3}
+  - {fileID: -2375443392834570567, guid: b79f22cd227d76c4b9c9986dcf0514f0, type: 3}
+  - {fileID: -3414594181903749073, guid: b79f22cd227d76c4b9c9986dcf0514f0, type: 3}
 --- !u!1 &5853162099449012828
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1469095976445352176}
   m_Layer: 0
-  m_Name: PlayerSpawnPoint
+  m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

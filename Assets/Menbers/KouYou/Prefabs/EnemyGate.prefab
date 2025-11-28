@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2154254248272389450}
   - component: {fileID: 938221032133582188}
-  - component: {fileID: 8888660867300293474}
+  - component: {fileID: 6088115765419041002}
   m_Layer: 0
   m_Name: EnemyGate
   m_TagString: Untagged
@@ -86,27 +86,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8888660867300293474
-Animator:
-  serializedVersion: 5
+--- !u!114 &6088115765419041002
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912924785013773807}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5f97bc30aec3aff40949b3bf95552d9c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9859a2901bb77244836761746e975c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _doorCloseTimerDef: 1
+  _doorCloseSprites:
+  - {fileID: 6031003822844650065, guid: b79f22cd227d76c4b9c9986dcf0514f0, type: 3}
+  - {fileID: -473496784789382452, guid: b79f22cd227d76c4b9c9986dcf0514f0, type: 3}
+  - {fileID: 974621082901636450, guid: b79f22cd227d76c4b9c9986dcf0514f0, type: 3}
 --- !u!1 &5207276796123723489
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1577289164655335202}
   m_Layer: 0
-  m_Name: EnemySpawnPoint
+  m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,16 +1,25 @@
+using System;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
     private BattleField _battleField;
-    private Vector3 _playerHomeSpawnPoint;
-    private Vector3 _enemyHomeSpawnPoint;
+    private GameObject[] _home = new GameObject[2];
+    private SpawnDoorEffect[] _spawnDoorEffect  = new SpawnDoorEffect[2];
+    private readonly Vector3[] _homeSpawnPoint = new Vector3[2];
     // Start is called before the first frame update
     void Start()
     {
         _battleField = this.GetComponent<BattleField>();
-        _playerHomeSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform.position;
-        _enemyHomeSpawnPoint = GameObject.Find("EnemySpawnPoint").transform.position;
+        _home[0] = GameObject.Find("EnemyGate");
+        _home[1] = GameObject.Find("PlayerGate");
+
+        for (var i = 0; i < _home.Length; i++)
+        {
+            var home = _home[i];
+            _spawnDoorEffect[i] = home.GetComponent<SpawnDoorEffect>();
+            _homeSpawnPoint[i] = home.transform.Find("SpawnPoint").position;
+        }
     }
     /// <summary>
     /// 引数のキャラをスポーンさせる
@@ -18,35 +27,12 @@ public class SpawnManager : MonoBehaviour
     /// <param name="characterPrefab">スポーンさせるキャラのプレハブ</param>
     public void CharacterSpawn(GameObject characterPrefab)
     {
-        if (characterPrefab.CompareTag("Player"))
-        {
-            SpawnPlayer(characterPrefab);
-        }
-        else
-        {
-            SpawnEnemy(characterPrefab);
-        }
+        var isPlayer = Convert.ToInt32(characterPrefab.CompareTag("Player"));//プレイヤーなら1 エネミーなら0
 
-    }
-    /// <summary>
-    /// プレイヤー側のスポーン
-    /// </summary>
-    /// <param name="characterPrefab">スポーンさせるキャラのプレハブ</param>
-    private void SpawnPlayer(GameObject characterPrefab)
-    {
-        var character = Instantiate(characterPrefab, _playerHomeSpawnPoint, Quaternion.identity)
+        _spawnDoorEffect[isPlayer].Spawn();
+        var character = Instantiate(characterPrefab, _homeSpawnPoint[isPlayer], Quaternion.identity)
             .GetComponent<Character>();
         _battleField.AddCharacter(character);
-    }
 
-    /// <summary>
-    /// エネミー側のスポーン
-    /// </summary>
-    /// <param name="characterPrefab">スポーンさせるキャラのプレハブ</param>
-    private void SpawnEnemy(GameObject characterPrefab)
-    {
-        var character = Instantiate(characterPrefab, _enemyHomeSpawnPoint, Quaternion.identity)
-            .GetComponent<Character>();
-        _battleField.AddCharacter(character);
     }
 }
