@@ -4,8 +4,8 @@ using UnityEngine;
 public class BattleManager
 {
     private const int TimingRange = 4;
-    private readonly HashSet<Character>[] _player = new HashSet<Character>[TimingRange];
-    private readonly HashSet<Character>[] _enemies = new HashSet<Character>[TimingRange];
+    private readonly HashSet<ICharacter>[] _player = new HashSet<ICharacter>[TimingRange];
+    private readonly HashSet<ICharacter>[] _enemies = new HashSet<ICharacter>[TimingRange];
     private readonly int[] _playerAttackValue = { 0, 0, 0, 0 };
     private readonly int[] _enemyAttackValue = { 0, 0, 0, 0 };
 
@@ -13,8 +13,8 @@ public class BattleManager
     {
         for (var i = 0; i < TimingRange; i++)
         {
-            _player[i] = new HashSet<Character>();
-            _enemies[i] = new HashSet<Character>();
+            _player[i] = new HashSet<ICharacter>();
+            _enemies[i] = new HashSet<ICharacter>();
         }
     }
 
@@ -22,7 +22,7 @@ public class BattleManager
     /// リストに追加し戦闘態勢に入る
     /// </summary>
     /// <param name="character">追加するキャラ</param>
-    public void AddList(Character character)
+    public void AddList(ICharacter character)
     {
         if (character.IsPlayer)
         {
@@ -40,7 +40,7 @@ public class BattleManager
     /// リストから削除し戦闘態勢を解除
     /// </summary>
     /// <param name="character">削除するキャラ</param>
-    public void RemoveList(Character character)
+    public void RemoveList(ICharacter character)
     {
         if (character.IsPlayer)
         {
@@ -80,7 +80,7 @@ public class BattleManager
     /// <param name="targetIndex">どのグループか</param>
     /// <param name="damage">与える総ダメージ</param>
     /// <returns>ノーダメなやつら</returns>
-    private void Damage(HashSet<Character>[] targetList, int targetIndex, int damage)
+    private void Damage(HashSet<ICharacter>[] targetList, int targetIndex, int damage)
     {
         var remainingDamage = damage;
         var i = targetIndex;

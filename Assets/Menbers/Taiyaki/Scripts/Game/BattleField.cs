@@ -13,11 +13,11 @@ public class BattleField : MonoBehaviour
     private Renderer _renderer;
     private Bounds _thisBound;
 
-    private readonly HashSet<Character> _moveCharacter = new();//HashSetは処理が軽いらしい 順序が消える代償があるけど…
-    private readonly HashSet<Character> _battleCharacter = new();//2つとも順序は関係ないからHashSet
+    private readonly HashSet<ICharacter> _moveCharacter = new();//HashSetは処理が軽いらしい 順序が消える代償があるけど…
+    private readonly HashSet<ICharacter> _battleCharacter = new();//2つとも順序は関係ないからHashSet
     private BattleManager _battleManager;
 
-    private readonly HashSet<Character> _modeChangeCharacter = new(); //バッファとして使うからhashSet
+    private readonly HashSet<ICharacter> _modeChangeCharacter = new(); //バッファとして使うからhashSet
 
     private void Start()
     {
@@ -36,15 +36,15 @@ public class BattleField : MonoBehaviour
         _thisBound = _renderer.bounds;//毎フレーム位置を更新しないといけない
 
         //nullがあったら消す(他のところでDestroyしているため)
-        _moveCharacter.RemoveWhere(c => c==null);
-        _battleCharacter.RemoveWhere(c => c==null);
+        _moveCharacter.RemoveWhere(c => (UnityEngine.Object)c==null);
+        _battleCharacter.RemoveWhere(c => (UnityEngine.Object)c==null);
 
         //戦闘開始ロジック
         foreach (var character in _moveCharacter)
         {
             if (_thisBound.Intersects(character.CharaRenderer.bounds) == false) continue; //もしキャラが戦闘エリアに被っていれば
             //戦闘開始
-            character.State = Character.CharacterState.Battle;
+            character.State = CharacterState.Battle;
             _battleManager.AddList(character);
             _modeChangeCharacter.Add(character);
             if (character.IsPlayer)
@@ -62,7 +62,7 @@ public class BattleField : MonoBehaviour
         {
             if (_thisBound.Intersects(character.CharaRenderer.bounds)) continue; //もしキャラが戦闘エリアから離れていれば
             //戦闘終了
-            character.State = Character.CharacterState.Walk;
+            character.State = CharacterState.Walk;
             _battleManager.RemoveList(character);
             _modeChangeCharacter.Add(character);
             if (character.IsPlayer)
@@ -91,9 +91,6 @@ public class BattleField : MonoBehaviour
             _battleTimer = 0f;
             _battleManager.Attack(_timing);
             _timing = (_timing + 1) % 4;
-            //nullの枠＝もう消えたやつを削除
-            _moveCharacter.RemoveWhere(c => c == null);
-            _battleCharacter.RemoveWhere(c => c == null);
         }
     }
 
@@ -102,7 +99,7 @@ public class BattleField : MonoBehaviour
         this.gameObject.transform.position += new Vector3(_moveSpeed * moveDirection, 0, 0);
     }
 
-    public void AddCharacter(Character character)
+    public void AddCharacter<T>(T character) where T : ICharacter
     {
         _moveCharacter.Add(character);
     }
