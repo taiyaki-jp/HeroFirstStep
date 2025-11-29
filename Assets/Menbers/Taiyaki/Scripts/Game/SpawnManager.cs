@@ -11,13 +11,13 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         _battleField = this.GetComponent<BattleField>();
-        _home[0] = GameObject.Find("EnemyGate");
-        _home[1] = GameObject.Find("PlayerGate");
+        _home[0] = GameObject.Find("EnemyHomeRoot");
+        _home[1] = GameObject.Find("PlayerHomeRoot");
 
         for (var i = 0; i < _home.Length; i++)
         {
             var home = _home[i];
-            _spawnDoorEffect[i] = home.GetComponent<SpawnDoorEffect>();
+            _spawnDoorEffect[i] = home.GetComponentInChildren<SpawnDoorEffect>();
             _homeSpawnPoint[i] = home.transform.Find("SpawnPoint").position;
         }
     }

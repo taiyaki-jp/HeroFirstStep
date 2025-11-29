@@ -20,6 +20,7 @@ public class Home : MonoBehaviour, ICharacter
     public CharacterState State { private get; set; }
     public int AttackTiming { get; private set; }
 
+    [SerializeField] private GameObject _homeObjet;
     private BattleField _battleField;
     private CancellationTokenSource _token;
 
@@ -44,19 +45,25 @@ public class Home : MonoBehaviour, ICharacter
             Break();
         else
         {
-            _token.Cancel();
+            // ここで前回のをキャンセル
+            _token?.Cancel();
+            _token?.Dispose();
+
+            // 新しいトークン発行
+            _token = new CancellationTokenSource();
+
             _ = DamageEffect(_token.Token);
         }
     }
 
     private void Break()
     {
-        
+        Destroy(_homeObjet);
     }
 
     private async UniTask DamageEffect(CancellationToken token)
     {
-        Tween tween = transform.DOShakePosition(0.5f);
+        Tween tween = _homeObjet.transform.DOShakePosition(0.5f);
         await tween.ToUniTask(cancellationToken: token);
     }
 }
