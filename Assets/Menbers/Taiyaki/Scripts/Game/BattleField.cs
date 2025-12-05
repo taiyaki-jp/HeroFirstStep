@@ -82,7 +82,7 @@ public class BattleField : MonoBehaviour
         else if (_battlePlayerCount == 0 &&_battleEnemyCount>0) //戦場にプレイヤーがいない＆敵はいる
             MoveField(1);//敵進軍
 
-        //Debug.Log($"移動:{_moveCharacter.Count}\n戦闘:{_battleCharacter.Count}");
+        Debug.Log($"移動:{_moveCharacter.Count}\n戦闘:{_battleCharacter.Count}");
 
         //戦闘タイミングの送信
         _battleTimer += Time.deltaTime;

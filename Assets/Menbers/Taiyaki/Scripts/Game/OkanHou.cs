@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,39 +8,45 @@ using UnityEngine.UI;
 public class OkanHou : MonoBehaviour
 {
     [SerializeField]private List<Sprite> _sprites = new List<Sprite>();
-    [SerializeField]private Button _button;
     [SerializeField] private float _moveValue;
     [SerializeField] private ParticleSystem _particle;
 
     private SpriteRenderer _renderer;
-    Vector3 _position;
+    private Vector3 _defaultPosition;
+    private Vector3 _moveTo;
 
     private void Start()
     {
-        _button.onClick.AddListener(() => _ = Move());
         _renderer = this.GetComponent<SpriteRenderer>();
-        _position = this.transform.position;
+        _defaultPosition = this.transform.position;
+        _moveTo = new Vector3(_defaultPosition.x,_defaultPosition.y+_moveValue,_defaultPosition.z);
     }
 
-    private async UniTask Move()
+    /// <summary>
+    ///オカン砲発射
+    /// </summary>
+    public async UniTask Fire()
     {
-        _button.interactable = false;
-        var moveTo=new Vector3(this.transform.position.x,this.transform.position.y+_moveValue,this.transform.position.z);
-        Tween tween = transform.DOMove(moveTo,1);
+        Tween tween = transform.DOMove(_moveTo,1);
         await tween.ToUniTask();
-        await EffectStart();
-        Tween backTween=transform.DOMove(_position,1);
+
+        _renderer.sprite = _sprites[1];//怒る
+        EffectStart();
+        await UniTask.Delay(TimeSpan.FromSeconds(2));//エフェクト出した後少し留まる
+
+        Tween backTween=transform.DOMove(_defaultPosition,1);
         await backTween.ToUniTask();
-        _renderer.sprite = _sprites[0];
-        _button.interactable = true;
+
+        _renderer.sprite = _sprites[0];//戻す
     }
 
-    private async UniTask EffectStart()
+    /// <summary>
+    /// パーティクルとSEの操作はこっち
+    /// </summary>
+    private void EffectStart()
     {
-        _renderer.sprite = _sprites[1];
         _particle.Play();
         SoundManager.Instance.PlaySE(SEAudioData.SEType.OkanVoice);
         SoundManager.Instance.PlaySE(SEAudioData.SEType.ShockWave);
-        await UniTask.Delay(TimeSpan.FromSeconds(2));
     }
 }

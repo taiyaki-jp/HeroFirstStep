@@ -4,8 +4,8 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private BattleField _battleField;
-    private GameObject[] _home = new GameObject[2];
-    private SpawnDoorEffect[] _spawnDoorEffect  = new SpawnDoorEffect[2];
+    private readonly GameObject[] _home = new GameObject[2];
+    private readonly SpawnDoorEffect[] _spawnDoorEffect  = new SpawnDoorEffect[2];
     private readonly Vector3[] _homeSpawnPoint = new Vector3[2];
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
         {
             var home = _home[i];
             _spawnDoorEffect[i] = home.GetComponentInChildren<SpawnDoorEffect>();
-            _homeSpawnPoint[i] = home.transform.Find("SpawnPoint").position;
+            _homeSpawnPoint[i] = home.transform.Find("HomeChara").position;
         }
     }
     /// <summary>

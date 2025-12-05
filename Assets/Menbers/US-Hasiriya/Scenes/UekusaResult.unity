@@ -1050,7 +1050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startButton: {fileID: 232030130}
-  _sceneName: Stage
+  _sceneName: MainGameScene
 --- !u!114 &924614559
 MonoBehaviour:
   m_ObjectHideFlags: 0

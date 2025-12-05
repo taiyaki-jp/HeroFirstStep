@@ -12,9 +12,9 @@ public class ButtonSetter : MonoBehaviour
 
     private Image _charaImage;
     private TextMeshProUGUI _nameText;
-    private TextMeshProUGUI _AtkText;
-    private TextMeshProUGUI _HPText;
-    private TextMeshProUGUI _CostText;
+    private TextMeshProUGUI _atkText;
+    private TextMeshProUGUI _hpText;
+    private TextMeshProUGUI _costText;
 
     private Character _character;
     private SpawnManager _spawnManager;
@@ -26,9 +26,9 @@ public class ButtonSetter : MonoBehaviour
 
         //各要素を拾ってくる
         _charaImage = this.transform.Find("Image")   .GetComponent<Image>();
-        _CostText   = this.transform.Find("CostText").GetComponent<TextMeshProUGUI>();
-        _AtkText    = this.transform.Find("ATKText") .GetComponent<TextMeshProUGUI>();
-        _HPText     = this.transform.Find("HPText")  .GetComponent<TextMeshProUGUI>();
+        _costText   = this.transform.Find("CostText").GetComponent<TextMeshProUGUI>();
+        _atkText    = this.transform.Find("ATKText") .GetComponent<TextMeshProUGUI>();
+        _hpText     = this.transform.Find("HPText")  .GetComponent<TextMeshProUGUI>();
         _nameText   = this.transform.Find("NameText").GetComponent<TextMeshProUGUI>();
 
         //拾ってきたやつを初期化
@@ -40,9 +40,9 @@ public class ButtonSetter : MonoBehaviour
         }
         _charaImage.sprite = _characterPrefab.GetComponent<SpriteRenderer>().sprite;
         _nameText.text = _character.Name;
-        _CostText.text += _character.Cost.ToString();
-        _AtkText.text += _character.Attack.ToString();
-        _HPText.text += _character.HP.ToString();
+        _costText.text += _character.Cost.ToString();
+        _atkText.text += _character.Attack.ToString();
+        _hpText.text += _character.HP.ToString();
 
 
         _button.onClick.AddListener(()=> _spawnManager.CharacterSpawn(_characterPrefab));

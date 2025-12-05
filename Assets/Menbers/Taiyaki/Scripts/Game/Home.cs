@@ -1,7 +1,9 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,6 +23,9 @@ public class Home : MonoBehaviour, ICharacter
     public int AttackTiming { get; private set; }
 
     [SerializeField] private GameObject _homeObjet;
+    [SerializeField]private TextMeshPro _hpText;
+    [SerializeField,Scene] private string _resultScene;
+    [SerializeField]private TextMeshProUGUI _resultText;
     private BattleField _battleField;
     private CancellationTokenSource _token;
 
@@ -36,11 +41,13 @@ public class Home : MonoBehaviour, ICharacter
     {
         _battleField = GameObject.Find("BattleField").GetComponent<BattleField>();
         _battleField.AddCharacter(this);
+        _hpText.text = _hp.ToString();
     }
 
     public void DoDamage(int damage)
     {
         _hp -= damage;
+        _hpText.text = _hp.ToString();
         if (_hp <= 0)
             Break();
         else
@@ -56,9 +63,12 @@ public class Home : MonoBehaviour, ICharacter
         }
     }
 
-    private void Break()
+    private async UniTask Break()
     {
+        SingletonDatas.Instance.IsWin = IsPlayer;
         Destroy(_homeObjet);
+        await UniTask.Delay(TimeSpan.FromSeconds(2));
+        _ = FadeManager.Instance.Fade<Enum>(_resultScene);
     }
 
     private async UniTask DamageEffect(CancellationToken token)
