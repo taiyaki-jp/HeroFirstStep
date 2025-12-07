@@ -30,6 +30,12 @@ public interface ICharacter
     /// </summary>
     /// <param name="damage">ダメージ量</param>
     public void DoDamage(int damage);
+
+    /// <summary>
+    /// そのキャラをスタンさせる
+    /// </summary>
+    /// <param name="stanTime"></param>
+    public void DoStan(float stanTime);
 }
 public enum CharacterState
 {

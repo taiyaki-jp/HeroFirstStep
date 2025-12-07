@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 現在殴り合っているキャラクターを制御します
+/// </summary>
 public class BattleManager
 {
     private const int TimingRange = 4;
@@ -9,6 +12,9 @@ public class BattleManager
     private readonly int[] _playerAttackValue = { 0, 0, 0, 0 };
     private readonly int[] _enemyAttackValue = { 0, 0, 0, 0 };
 
+    /// <summary>
+    /// UnityのAwakeタイミングで呼び出し
+    /// </summary>
     public void Init()
     {
         for (var i = 0; i < TimingRange; i++)

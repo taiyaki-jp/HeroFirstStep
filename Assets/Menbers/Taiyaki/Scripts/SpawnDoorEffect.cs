@@ -12,13 +12,20 @@ public class SpawnDoorEffect : MonoBehaviour
     private float _closeTimer;
     private bool _isOpen;
 
-    private void Start()
+    private void Awake()
     {
         _closeTimer = _doorCloseTimerDef;
         _renderer = this.gameObject.GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
         _renderer.sprite = _doorCloseSprites[0];
     }
 
+    /// <summary>
+    /// スポーン時に呼び出す
+    /// </summary>
     public void Spawn()
     {
         _closeTimer = _doorCloseTimerDef;
@@ -47,6 +54,9 @@ public class SpawnDoorEffect : MonoBehaviour
         _isOpen = false;
     }
 
+    /// <summary>
+    /// ドアが閉まるまでカウントダウン
+    /// </summary>
     private async UniTask DoorTimerUpdate()
     {
         while (_closeTimer>0)

@@ -8,7 +8,7 @@ public class SpawnManager : MonoBehaviour
     private readonly SpawnDoorEffect[] _spawnDoorEffect  = new SpawnDoorEffect[2];
     private readonly Vector3[] _homeSpawnPoint = new Vector3[2];
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _battleField = this.GetComponent<BattleField>();
         _home[0] = GameObject.Find("EnemyHomeRoot");

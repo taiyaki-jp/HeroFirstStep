@@ -250,8 +250,14 @@ MonoBehaviour:
   - _type: 2
     _audioClip: {fileID: 8300000, guid: dc8e7fdab39df884db721cb80d49a0c4, type: 3}
     _volume: 0.6
-  - _type: 3
+  - _type: 4
     _audioClip: {fileID: 8300000, guid: f0d345a3910136b498e6a2aefb1791f7, type: 3}
+    _volume: 0.6
+  - _type: 5
+    _audioClip: {fileID: 8300000, guid: ca3a4b6196efe5940b86018b8ec6cc00, type: 3}
+    _volume: 0.6
+  - _type: 3
+    _audioClip: {fileID: 8300000, guid: c57bd7fb80f11d6498f6c94376982368, type: 3}
     _volume: 0.6
   _seAudioSource: {fileID: 1633673073442408880}
   _bgmAudioSource: {fileID: 3605142816934288999}

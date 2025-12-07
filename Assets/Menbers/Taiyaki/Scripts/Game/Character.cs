@@ -45,14 +45,6 @@ public class Character : MonoBehaviour, ICharacter
         //タグからプレイヤーかどうかを見る
         IsPlayer = this.CompareTag("Player");
         CharaRenderer = this.GetComponent<SpriteRenderer>();
-    }
-
-    /// <summary>
-    /// 初期設定→スポーン演出→メインループへ
-    /// </summary>
-    /// <returns></returns>
-    public async void Start()
-    {
         if (IsPlayer)
         {
             _moveMultiplier = -1; //後ろ回転 前進
@@ -63,7 +55,14 @@ public class Character : MonoBehaviour, ICharacter
             _moveMultiplier = 1; //後ろ回転 前進
             _deathMoveTo = GameObject.Find("EnemyDeathPoint");
         }
+    }
 
+    /// <summary>
+    /// 初期設定→スポーン演出→メインループへ
+    /// </summary>
+    /// <returns></returns>
+    public async void Start()
+    {
         await SpawnMove(_cancellationTokenSource.Token);
 
         //行動開始
@@ -142,6 +141,14 @@ public class Character : MonoBehaviour, ICharacter
     }
 
     /// <summary>
+    /// スタン処理 攻撃を受けると解除される
+    /// </summary>
+    /// <param name="stanTime">スタンする時間</param>
+    public void DoStan(float stanTime)
+    {
+    }
+
+    /// <summary>
     /// ノックバックを発生させる
     /// </summary>
     private async UniTask Knockback(CancellationToken token)
@@ -158,7 +165,7 @@ public class Character : MonoBehaviour, ICharacter
             jump.ToUniTask(cancellationToken: token),
             rotate.ToUniTask(cancellationToken: token)
         );
-        if (_state != CharacterState.Battle) _state = CharacterState.Walk; //バトルなら戦闘続行　違うなら歩き状態に
+        if (_state != CharacterState.Battle) _state = CharacterState.Walk; //バトルなら戦闘続行　違うなら歩き状態に　
     }
 
     /// <summary>

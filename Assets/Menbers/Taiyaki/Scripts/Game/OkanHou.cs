@@ -2,8 +2,8 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class OkanHou : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class OkanHou : MonoBehaviour
     private Vector3 _defaultPosition;
     private Vector3 _moveTo;
 
-    private void Start()
+    private void Awake()
     {
         _renderer = this.GetComponent<SpriteRenderer>();
         _defaultPosition = this.transform.position;
@@ -25,17 +25,17 @@ public class OkanHou : MonoBehaviour
     /// <summary>
     ///オカン砲発射
     /// </summary>
-    public async UniTask Fire()
+    public async UniTask Fire(CancellationToken token)
     {
         Tween tween = transform.DOMove(_moveTo,1);
-        await tween.ToUniTask();
+        await tween.ToUniTask(cancellationToken: token);
 
         _renderer.sprite = _sprites[1];//怒る
         EffectStart();
-        await UniTask.Delay(TimeSpan.FromSeconds(2));//エフェクト出した後少し留まる
+        await UniTask.Delay(TimeSpan.FromSeconds(2), cancellationToken: token);//エフェクト出した後少し留まる
 
         Tween backTween=transform.DOMove(_defaultPosition,1);
-        await backTween.ToUniTask();
+        await backTween.ToUniTask(cancellationToken: token);
 
         _renderer.sprite = _sprites[0];//戻す
     }

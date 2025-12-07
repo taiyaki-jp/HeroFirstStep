@@ -69,6 +69,7 @@ public class SEAudioData
         Button,
         Damage,
         Death,
+        Brake,
         ShockWave,
         OkanVoice,
     }

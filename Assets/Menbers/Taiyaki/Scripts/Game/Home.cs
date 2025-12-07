@@ -28,6 +28,7 @@ public class Home : MonoBehaviour, ICharacter
     [SerializeField]private TextMeshProUGUI _resultText;
     private BattleField _battleField;
     private CancellationTokenSource _token;
+    private bool _isBreak;
 
     private void Awake()
     {
@@ -42,19 +43,24 @@ public class Home : MonoBehaviour, ICharacter
         _battleField = GameObject.Find("BattleField").GetComponent<BattleField>();
         _battleField.AddCharacter(this);
         _hpText.text = _hp.ToString();
+        _isBreak = false;
     }
 
     public void DoDamage(int damage)
     {
+        if(_isBreak)return;
         _hp -= damage;
         _hpText.text = _hp.ToString();
         if (_hp <= 0)
-            Break();
+        {
+            _isBreak = true;
+            _ = Break();
+        }
         else
         {
             // ここで前回のをキャンセル
-            _token?.Cancel();
-            _token?.Dispose();
+            _token.Cancel();
+            _token.Dispose();
 
             // 新しいトークン発行
             _token = new CancellationTokenSource();
@@ -63,17 +69,37 @@ public class Home : MonoBehaviour, ICharacter
         }
     }
 
+    public void DoStan(float stanTime)
+    {
+        //拠点はスタン効果を受けない
+    }
+
+    /// <summary>
+    /// 破壊エフェクトからシーンフェードまで
+    /// </summary>
     private async UniTask Break()
     {
         SingletonDatas.Instance.IsWin = IsPlayer;
         Destroy(_homeObjet);
+        SoundManager.Instance.PlaySE(SEAudioData.SEType.Brake);
         await UniTask.Delay(TimeSpan.FromSeconds(2));
         _ = FadeManager.Instance.Fade<Enum>(_resultScene);
+        _token.Cancel();
     }
 
+    /// <summary>
+    /// 被ダメ時に揺らしたり
+    /// </summary>
+    /// <param name="token"></param>
     private async UniTask DamageEffect(CancellationToken token)
     {
+        SoundManager.Instance.PlaySE(SEAudioData.SEType.Damage);
         Tween tween = _homeObjet.transform.DOShakePosition(0.5f);
         await tween.ToUniTask(cancellationToken: token);
+    }
+
+    private void OnDestroy()
+    {
+        _token.Cancel();
     }
 }

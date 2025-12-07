@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 現在存在するすべてのキャラクターを制御します
+/// </summary>
 public class BattleField : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 1f;
@@ -19,7 +22,7 @@ public class BattleField : MonoBehaviour
 
     private readonly HashSet<ICharacter> _modeChangeCharacter = new(); //バッファとして使うからhashSet
 
-    private void Start()
+    private void Awake()
     {
         _battlePlayerCount = 0;
         _battleEnemyCount = 0;
