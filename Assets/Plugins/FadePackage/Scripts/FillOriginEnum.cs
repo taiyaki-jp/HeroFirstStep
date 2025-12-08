@@ -37,9 +37,12 @@ namespace FadeOrigins
     }
 }
 
+/// <value>BeforeFade シーン遷移前の画面が隠れた時</value>
+/// <value>AfterFade シーン遷移後画面が隠れている時</value>
+/// <value>FinishFade シーン遷移後画面が完全に開けた時</value>
 public enum FadeActionMode
 {
-    BeforeFade,
+    BeforeFade,//シーン遷移前
     AfterFade,
     FinishFade
 }

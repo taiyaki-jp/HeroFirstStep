@@ -24,26 +24,27 @@ public class Home : MonoBehaviour, ICharacter
 
     [SerializeField] private GameObject _homeObjet;
     [SerializeField]private TextMeshPro _hpText;
-    [SerializeField,Scene] private string _resultScene;
     [SerializeField]private TextMeshProUGUI _resultText;
     private BattleField _battleField;
+    private GameSceneManager _gameSceneManager;
     private CancellationTokenSource _token;
     private bool _isBreak;
 
     private void Awake()
     {
         CharaRenderer = GetComponent<SpriteRenderer>();
+        _gameSceneManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
+        _battleField = GameObject.Find("BattleField").GetComponent<BattleField>();
         IsPlayer = this.CompareTag("Player");
         AttackTiming = Random.Range(0, 3);
         _token = new CancellationTokenSource();
+        _isBreak = false;
     }
 
     private void Start()
     {
-        _battleField = GameObject.Find("BattleField").GetComponent<BattleField>();
         _battleField.AddCharacter(this);
         _hpText.text = _hp.ToString();
-        _isBreak = false;
     }
 
     public void DoDamage(int damage)
@@ -79,11 +80,11 @@ public class Home : MonoBehaviour, ICharacter
     /// </summary>
     private async UniTask Break()
     {
-        SingletonDatas.Instance.IsWin = IsPlayer;
+        SingletonDatas.Instance.IsWin = ! IsPlayer;//壊されたほうが動くので反転
         Destroy(_homeObjet);
         SoundManager.Instance.PlaySE(SEAudioData.SEType.Brake);
         await UniTask.Delay(TimeSpan.FromSeconds(2));
-        _ = FadeManager.Instance.Fade<Enum>(_resultScene);
+        _gameSceneManager.GameEnd();
         _token.Cancel();
     }
 

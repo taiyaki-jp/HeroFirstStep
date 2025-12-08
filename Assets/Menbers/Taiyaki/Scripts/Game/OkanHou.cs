@@ -20,6 +20,7 @@ public class OkanHou : MonoBehaviour
         _renderer = this.GetComponent<SpriteRenderer>();
         _defaultPosition = this.transform.position;
         _moveTo = new Vector3(_defaultPosition.x,_defaultPosition.y+_moveValue,_defaultPosition.z);
+        _renderer.enabled = false;
     }
 
     /// <summary>
@@ -27,6 +28,8 @@ public class OkanHou : MonoBehaviour
     /// </summary>
     public async UniTask Fire(CancellationToken token)
     {
+        _renderer.enabled = true;
+
         Tween tween = transform.DOMove(_moveTo,1);
         await tween.ToUniTask(cancellationToken: token);
 
@@ -38,6 +41,7 @@ public class OkanHou : MonoBehaviour
         await backTween.ToUniTask(cancellationToken: token);
 
         _renderer.sprite = _sprites[0];//戻す
+        _renderer.enabled = false;
     }
 
     /// <summary>

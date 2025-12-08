@@ -98,9 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: "\u30E4\u30AF\u30B6\u5E79\u90E8\u9054"
-  _attack: 30
-  _hp: 100
-  _moveSpeed: 0.3
+  _attack: 50
+  _hp: 200
+  _moveSpeed: 0.6
   _cost: 100
   _knockbackForce: 0.5
   _deathEffectTime: 1

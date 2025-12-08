@@ -102,7 +102,6 @@ public class FadeManager : SingletonBase<FadeManager>
         //defaultを変換
         if (startColor == default) startColor = Color.black;//色省略なら黒に
         if (startOrigin == null) startColor = new Color (startColor.r,startColor.g,startColor.b,0f);//origin省略なら透明に
-        
 
         if (midColor == default) midColor = Color.black;//色省略なら黒に
 

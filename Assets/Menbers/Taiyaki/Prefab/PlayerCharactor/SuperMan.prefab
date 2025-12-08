@@ -100,7 +100,7 @@ MonoBehaviour:
   _name: "\u30B3\u30B9\u30D7\u30EC\u30DE\u30F3"
   _attack: 20
   _hp: 40
-  _moveSpeed: 1
-  _cost: 10
+  _moveSpeed: 2
+  _cost: 100
   _knockbackForce: 1.5
   _deathEffectTime: 0.7

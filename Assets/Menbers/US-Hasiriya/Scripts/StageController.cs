@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,16 +7,16 @@ public static class StageController
 {
     public static string stageName;
 
-    // u‚±‚Ìƒƒ\ƒbƒh‚ªÀs‚³‚ê‚½‚ÉŠJ‚¢‚Ä‚¢‚éƒV[ƒ“‚Ì–¼‘Ov‚ğæ“¾‚·‚éB
-    // ¡‰ñ‚Ìê‡‚ÍAƒQ[ƒ€ƒI[ƒo[‚ÌğŒ‚ª‘µ‚Á‚½‚ÉA‚±‚Ìƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·B
+    // ã€Œã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ãŒå®Ÿè¡Œã•ã‚ŒãŸæ™‚ã«é–‹ã„ã¦ã„ã‚‹ã‚·ãƒ¼ãƒ³ã®åå‰ã€ã‚’å–å¾—ã™ã‚‹ã€‚
+    // ä»Šå›ã®å ´åˆã¯ã€ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã®æ¡ä»¶ãŒæƒã£ãŸæ™‚ã«ã€ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã™ã€‚
     public static void CurrentStageNumber()
     {
         stageName = SceneManager.GetActiveScene().name;
         Debug.Log(stageName);
     }
 
-    // ã‹L‚Ìƒƒ\ƒbƒh‚Åæ“¾‚³‚ê‚½ƒV[ƒ“‚É–ß‚éB
-    // ¡‰ñ‚Ìê‡‚ÍAƒRƒ“ƒeƒBƒjƒ…[ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚É‚±‚Ìƒƒ\ƒbƒh‚ğÀs‚·‚éB
+    // ä¸Šè¨˜ã®ãƒ¡ã‚½ãƒƒãƒ‰ã§å–å¾—ã•ã‚ŒãŸã‚·ãƒ¼ãƒ³ã«æˆ»ã‚‹ã€‚
+    // ä»Šå›ã®å ´åˆã¯ã€ã‚³ãƒ³ãƒ†ã‚£ãƒ‹ãƒ¥ãƒ¼ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸæ™‚ã«ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹ã€‚
     public static void BackToBeforeScene()
     {
         SceneManager.LoadScene(stageName);

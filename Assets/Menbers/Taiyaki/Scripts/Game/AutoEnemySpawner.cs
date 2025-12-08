@@ -20,7 +20,7 @@ public class AutoEnemySpawner : MonoBehaviour
         _spawnManager = GameObject.Find("BattleField").GetComponent<SpawnManager>();
     }
 
-    private void Start()
+    public void GameStart()
     {
         _ = Spawn(_token.Token);
     }

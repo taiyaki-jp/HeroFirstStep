@@ -45,6 +45,11 @@ public class SoundManager : SingletonBase<SoundManager>
         _seAudioSource.volume = data._volume;
         _seAudioSource.Play();
     }
+
+    public void StopAllSE()
+    {
+        _seAudioSource.Stop();
+    }
 }
 
 [System.Serializable]
