@@ -13,6 +13,7 @@ public class Home : MonoBehaviour, ICharacter
     [SerializeField,Label("名前")]private string _name="Home-none";
     [SerializeField,Label("攻撃力"),InfoBox("↓自動迎撃システムみたいなことができるかも↓")]private int _attack = 0;
     [SerializeField,Label("HP")] private int _hp = 300;
+    [SerializeField,Label("耐性")]private ResistanceData _resists;
 
     public string Name => _name;
     public int Attack => _attack;
@@ -22,6 +23,8 @@ public class Home : MonoBehaviour, ICharacter
     public CharacterState State { private get; set; }
     public int AttackTiming { get; private set; }
 
+    public ResistanceData ResistData { get => _resists; }
+    [Header("演出系")]
     [SerializeField] private GameObject _homeObjet;
     [SerializeField]private TextMeshPro _hpText;
     [SerializeField]private TextMeshProUGUI _resultText;

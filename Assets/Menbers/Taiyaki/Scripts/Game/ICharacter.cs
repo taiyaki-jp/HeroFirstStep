@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public interface ICharacter
 {
@@ -25,6 +28,9 @@ public interface ICharacter
     /// <remarks>0~3</remarks>
     public int AttackTiming { get; }
 
+    /// <returns>ResistanceData :耐性の有無(Bool)</returns>
+    public ResistanceData ResistData { get; }
+
     /// <summary>
     /// そのキャラにダメージを与える
     /// </summary>
@@ -37,10 +43,18 @@ public interface ICharacter
     /// <param name="stanTime"></param>
     public void DoStan(float stanTime);
 }
+
 public enum CharacterState
 {
     Death,
     Walk,
     Battle,
     Knockback,
+}
+
+[Serializable]
+public class ResistanceData
+{
+    public bool Stun = false;
+    public bool KnockBack = false;
 }

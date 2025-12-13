@@ -17,6 +17,7 @@ public class Character : MonoBehaviour, ICharacter
     [SerializeField, Label("移動速度")] private float _moveSpeed=0.3f;
 
     [SerializeField, Label("(味方)必要コスト/(敵)倒すともらえるコスト")] private int _cost = 10;
+    [SerializeField, Label("耐性")] private ResistanceData _resists;
 
     public string Name => _name;
     public int Attack => _attack;
@@ -30,12 +31,13 @@ public class Character : MonoBehaviour, ICharacter
 
     public SpriteRenderer CharaRenderer { get; private set; } //現在位置をとるため
 
+    public ResistanceData ResistData {  get => _resists;}
+
     [Header("演出系")]
     [SerializeField, Label("ノックバックでどれだけ飛ぶか")] private float _knockbackForce = 3;
     [SerializeField, Label("死亡演出の時間")] private float _deathEffectTime = 0.7f;
     private int _moveMultiplier; //後ろ回転の方向
     private GameObject _deathMoveTo; //死亡演出でどこにすっ飛ぶか
-
     private readonly CancellationTokenSource _cancellationTokenSource = new();
 
     private void Awake()
@@ -146,6 +148,7 @@ public class Character : MonoBehaviour, ICharacter
     /// <param name="stanTime">スタンする時間</param>
     public void DoStan(float stanTime)
     {
+        if (_resists.Stun) return;
     }
 
     /// <summary>
