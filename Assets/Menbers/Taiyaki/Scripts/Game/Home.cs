@@ -85,7 +85,7 @@ public class Home : MonoBehaviour, ICharacter
     {
         SingletonDatas.Instance.IsWin = ! IsPlayer;//壊されたほうが動くので反転
         Destroy(_homeObjet);
-        SoundManager.Instance.PlaySE(SEAudioData.SEType.Brake);
+        SoundManager.Instance.PlaySE(SETypeEnum.Brake);
         await UniTask.Delay(TimeSpan.FromSeconds(2));
         _gameSceneManager.GameEnd();
         _token.Cancel();
@@ -97,7 +97,7 @@ public class Home : MonoBehaviour, ICharacter
     /// <param name="token"></param>
     private async UniTask DamageEffect(CancellationToken token)
     {
-        SoundManager.Instance.PlaySE(SEAudioData.SEType.Damage);
+        SoundManager.Instance.PlaySE(SETypeEnum.Damage);
         Tween tween = _homeObjet.transform.DOShakePosition(0.5f);
         await tween.ToUniTask(cancellationToken: token);
     }

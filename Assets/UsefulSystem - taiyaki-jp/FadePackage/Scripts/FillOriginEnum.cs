@@ -1,4 +1,4 @@
-namespace FadeOrigins
+namespace FadeOptions
 {
     public enum Horizontal
     {
@@ -37,12 +37,15 @@ namespace FadeOrigins
     }
 }
 
-/// <value>BeforeFade シーン遷移前の画面が隠れた時</value>
-/// <value>AfterFade シーン遷移後画面が隠れている時</value>
-/// <value>FinishFade シーン遷移後画面が完全に開けた時</value>
 public enum FadeActionMode
 {
-    BeforeFade,//シーン遷移前
+    BeforeFade,
     AfterFade,
     FinishFade
+}
+
+public enum FadeMode
+{
+    FadeIn = 1,
+    FadeOut = -1,
 }

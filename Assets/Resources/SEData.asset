@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560766f225c8cdd49a19d07557f1eb2d, type: 3}
+  m_Name: SEData
+  m_EditorClassIdentifier: 
+  seDatas:
+  - seName: Damage
+    audioClip: {fileID: 8300000, guid: 8425b4307e0446543adb2155cb9971bb, type: 3}
+    volume: 1
+  - seName: Death
+    audioClip: {fileID: 8300000, guid: dc8e7fdab39df884db721cb80d49a0c4, type: 3}
+    volume: 1
+  - seName: OkanVoice
+    audioClip: {fileID: 8300000, guid: ca3a4b6196efe5940b86018b8ec6cc00, type: 3}
+    volume: 1
+  - seName: ShockWave
+    audioClip: {fileID: 8300000, guid: f0d345a3910136b498e6a2aefb1791f7, type: 3}
+    volume: 1
+  - seName: Brake
+    audioClip: {fileID: 8300000, guid: c57bd7fb80f11d6498f6c94376982368, type: 3}
+    volume: 1

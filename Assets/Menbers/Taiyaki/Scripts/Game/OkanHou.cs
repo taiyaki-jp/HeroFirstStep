@@ -50,7 +50,7 @@ public class OkanHou : MonoBehaviour
     private void EffectStart()
     {
         _particle.Play();
-        SoundManager.Instance.PlaySE(SEAudioData.SEType.OkanVoice);
-        SoundManager.Instance.PlaySE(SEAudioData.SEType.ShockWave);
+        SoundManager.Instance.PlaySE(SETypeEnum.OkanVoice);
+        SoundManager.Instance.PlaySE(SETypeEnum.ShockWave);
     }
 }

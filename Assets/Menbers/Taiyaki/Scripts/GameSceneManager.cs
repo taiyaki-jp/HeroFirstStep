@@ -20,7 +20,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void GameEnd()
     {
-        _ = FadeManager.Instance.Fade<Enum>(_resultScene);
+        _ = FadeManager.Instance.FadeAndSceneChange<Enum>(_resultScene);
     }
 
     private void StartGame()

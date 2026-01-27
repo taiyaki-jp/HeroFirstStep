@@ -156,7 +156,7 @@ public class Character : MonoBehaviour, ICharacter
     /// </summary>
     private async UniTask Knockback(CancellationToken token)
     {
-        SoundManager.Instance.PlaySE(SEAudioData.SEType.Damage);
+        SoundManager.Instance.PlaySE(SETypeEnum.Damage);
 
         var startPos = transform.position;
         var targetPos = startPos + new Vector3(-_moveMultiplier * _knockbackForce,0,0);
@@ -178,7 +178,7 @@ public class Character : MonoBehaviour, ICharacter
     {
         _cancellationTokenSource.Cancel(); //既存UniTaskを全部中止
 
-        SoundManager.Instance.PlaySE(SEAudioData.SEType.Death);
+        SoundManager.Instance.PlaySE(SETypeEnum.Death);
 
         Tween move = transform.DOMove(_deathMoveTo.transform.position, _deathEffectTime).SetEase(Ease.OutCubic);
         Tween rotate = transform.DORotate(new Vector3(0, 0, 720 * _moveMultiplier), _deathEffectTime,

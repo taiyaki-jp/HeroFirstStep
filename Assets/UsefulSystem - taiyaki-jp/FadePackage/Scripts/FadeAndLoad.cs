@@ -1,8 +1,9 @@
 ﻿using Cysharp.Threading.Tasks;
 using System;
-using FadeOrigins;
+using FadeOptions;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Threading;
 
 public class FadeAndLoad
 {
@@ -12,6 +13,7 @@ public class FadeAndLoad
         set => _fadeSpeed = value;
     }
     private Image _fadeImage;
+
     public Image Image
     {
         set => _fadeImage = value;
@@ -20,12 +22,13 @@ public class FadeAndLoad
     /// <summary>
     /// 各フェードを呼び出すUniTask
     /// </summary>
-    /// <param name="mode">-1=フェードアウト　+1=フェードイン</param>
+    /// <param name="token"></param>
+    /// <param name="mode">FadeMode</param>
     /// <param name="startColor">開始時の色</param>
     /// <param name="endColor">終了時の色</param>
     /// <param name="origin">[省略可]FillOriginEnumのどれか　省略すると透明度フェード</param>
     /// <typeparam name="TOriginEnum"></typeparam>
-    public async UniTask FadeSystem<TOriginEnum>(int mode,Color startColor,Color endColor,TOriginEnum origin=default) where TOriginEnum : Enum
+    public async UniTask FadeSystem<TOriginEnum>(CancellationToken token,FadeMode mode,Color startColor,Color endColor,TOriginEnum origin = default) where TOriginEnum : Enum
     {
 
         var useColor = (startColor != endColor);//フェード中色を変えるか
@@ -37,7 +40,7 @@ public class FadeAndLoad
         {
             _fadeImage.fillMethod = AutoMethodSet(origin);
             _fadeImage.fillOrigin = Convert.ToInt32(origin);//Enumをintに変換
-            if (mode == -1)
+            if (mode == FadeMode.FadeIn)
                 _fadeImage.fillAmount = 1;
             else
                 _fadeImage.fillAmount = 0;
@@ -51,6 +54,13 @@ public class FadeAndLoad
         var t = 0f;
         while (t<1)
         {
+            //キャンセルが飛んでいればこのフェードを即時完了
+            if (token.IsCancellationRequested)
+            {
+                Debug.Log("Cancellation requested");
+                TaskCancel(mode,startColor,endColor);
+                return;
+            }
             t += _fadeSpeed * Time.deltaTime;
             if (useOrigin) Fade(mode, t);
             if (useColor)  Fade(t,startColor,endColor);
@@ -58,19 +68,25 @@ public class FadeAndLoad
         }
     }
 
+    private void TaskCancel(FadeMode mode, Color startColor, Color endColor)
+    {
+        Fade(mode, 1);
+        Fade(1,startColor,endColor);
+    }
+
     /// <summary>
     /// FillAmount式フェード
     /// </summary>
     /// <param name="mode">インかアウトか</param>
     /// <param name="t">経過時間</param>
-    private void Fade(int mode,float t)
+    private void Fade(FadeMode mode,float t)
     {
         var fillAmount = 0f;
-        if (mode == -1)
+        if (mode == FadeMode.FadeIn)
         {
             fillAmount = 1 - t;
         }
-        else if (mode == 1)
+        else if (mode == FadeMode.FadeOut)
         {
             fillAmount = t;
         }
