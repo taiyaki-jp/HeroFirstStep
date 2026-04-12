@@ -30,8 +30,18 @@ public class SpawnManager : MonoBehaviour
         var isPlayer = Convert.ToInt32(characterPrefab.CompareTag("Player"));//プレイヤーなら1 エネミーなら0
 
         _spawnDoorEffect[isPlayer].Spawn();
-        var character = Instantiate(characterPrefab, _homeSpawnPoint[isPlayer], Quaternion.identity)
-            .GetComponent<Character>();
+        Character character;
+        if (isPlayer == 1)
+        {
+            character = Instantiate(characterPrefab, _homeSpawnPoint[isPlayer] + new Vector3(1,0,0), Quaternion.identity)
+                .GetComponent<Character>();
+        }
+        else
+        {
+            character = Instantiate(characterPrefab, _homeSpawnPoint[isPlayer] + new Vector3(-1,0,0), Quaternion.identity)
+                .GetComponent<Character>();
+        }
+
         _battleField.AddCharacter(character);
 
     }

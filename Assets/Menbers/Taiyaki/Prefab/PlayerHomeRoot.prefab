@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 47561916648097253}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.53, y: -0.44999993, z: 0}
+  m_LocalPosition: {x: 7.5, y: -0.44999993, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -606,7 +606,7 @@ Transform:
   m_GameObject: {fileID: 5530218837957477389}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.53, y: -1.7499999, z: 0}
+  m_LocalPosition: {x: 6.5, y: -1.7499999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -627,9 +627,11 @@ MonoBehaviour:
   _name: Home-none
   _attack: 0
   _hp: 300
+  _resists:
+    Stun: 0
+    KnockBack: 0
   _homeObjet: {fileID: 47561916648097253}
   _hpText: {fileID: 733125597909347701}
-  _resultScene: UekusaResult
   _resultText: {fileID: 0}
 --- !u!212 &3249366926643278697
 SpriteRenderer:
