@@ -344,6 +344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 232030129}
   - component: {fileID: 232030132}
+  - component: {fileID: 232030133}
   - component: {fileID: 232030131}
   - component: {fileID: 232030130}
   m_Layer: 5
@@ -455,6 +456,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 232030128}
   m_CullTransparentMesh: 1
+--- !u!114 &232030133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232030128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b432b836114030408e5540efdb052de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneName: MainGameScene
 --- !u!1001 &586359900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1029,8 +1043,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 924614557}
-  - component: {fileID: 924614554}
-  - component: {fileID: 924614558}
   - component: {fileID: 924614559}
   m_Layer: 0
   m_Name: GameObject
@@ -1039,20 +1051,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &924614554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924614553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e20eab77493ff5244af98d0bc91baab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startButton: {fileID: 1616285068}
-  _sceneName: UekusaTitle
 --- !u!4 &924614557
 Transform:
   m_ObjectHideFlags: 0
@@ -1068,20 +1066,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &924614558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924614553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e20eab77493ff5244af98d0bc91baab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startButton: {fileID: 232030130}
-  _sceneName: MainGameScene
 --- !u!114 &924614559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1205,6 +1189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1616285067}
   - component: {fileID: 1616285070}
+  - component: {fileID: 1616285071}
   - component: {fileID: 1616285069}
   - component: {fileID: 1616285068}
   m_Layer: 5
@@ -1316,6 +1301,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616285066}
   m_CullTransparentMesh: 1
+--- !u!114 &1616285071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616285066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b432b836114030408e5540efdb052de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneName: UekusaTitle
 --- !u!1 &1852424243
 GameObject:
   m_ObjectHideFlags: 0
