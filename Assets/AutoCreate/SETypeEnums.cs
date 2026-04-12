@@ -5,10 +5,10 @@
 /// </summary>
 public enum SETypeEnum
 {
-    Damage,
-    Death,
-    Button,
-    OkanVoice,
-    ShockWave,
-    Brake
+    Damage　,
+    Death　,
+    OkanVoice　,
+    ShockWave　,
+    Brake　,
+    Button　,
 }

@@ -23,26 +23,28 @@ public class SoundManager : SingletonBase<SoundManager>
     protected override void Awake()
     {
         base.Awake();
-        Init();
+        if(_isInited== false)
+        _ = Init();
     }
 #endregion
 
 
     //SEを同時に何個鳴らすか
-    private int _seMaxCount;
-    private bool _isInited = false;
+    private static int _seMaxCount;
+    private static bool _isInited = false;
 
     /// <summary>
     /// 初期化してサウンドのデータをロードします
     /// </summary>
     /// <param name="seMaxCount">SEを同時に鳴らす最大数　初期値は15</param>
-    public async UniTask Init(int seMaxCount = 15)
+    /// <remarks>最初にawaitつけて呼び出すこと</remarks>
+    public static async UniTask Init(int seMaxCount = 15)
     {
         if (_isInited)return;
         _seMaxCount = seMaxCount;
-        await LoadBGMData();
-        await LoadJingleData();
-        await LoadSEData();
+        await Instance.LoadBGMData();
+        await Instance.LoadJingleData();
+        await Instance.LoadSEData();
         _isInited = true;
     }
 

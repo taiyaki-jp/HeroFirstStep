@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Menbers/US-Hasiriya/Scenes/UekusaTitle.unity
+    path: Assets/Scenes/Title.unity
     guid: 34f9dbbf8c8019d45b9ae1c123098858
   - enabled: 1
-    path: Assets/Menbers/Taiyaki/Scenes/MainGameScene.unity
+    path: Assets/Scenes/MainGameScene.unity
     guid: b36e21ba8d888474b8b39a1d9f1f01b4
   - enabled: 1
-    path: Assets/Menbers/US-Hasiriya/Scenes/UekusaResult.unity
+    path: Assets/Scenes/Result.unity
     guid: 5291cadec7fb28e46b3bcfb0266a32be
   m_configObjects: {}

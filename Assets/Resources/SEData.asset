@@ -28,3 +28,6 @@ MonoBehaviour:
   - seName: Brake
     audioClip: {fileID: 8300000, guid: c57bd7fb80f11d6498f6c94376982368, type: 3}
     volume: 1
+  - seName: Button
+    audioClip: {fileID: 8300000, guid: c832526b2006a5247a7f8b3ddbebafdd, type: 3}
+    volume: 1
